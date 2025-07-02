@@ -13,21 +13,25 @@ import java.util.List;
 
 public class VentaService {
 
-    @Autowired
+
     private VentaRepository ventarepository;
 
-    public List<Venta> BuscarTodaVenta() {
+    public VentaService(VentaRepository ventarepository) {
+        this.ventarepository = ventarepository;
+    }
+
+    public List<Venta> buscarTodaVenta() {
         return ventarepository.findAll();
     }
-    public Venta BuscarUnaVenta(Long idventa) {
+    public Venta buscarUnaVenta(Long idventa) {
         return ventarepository.findById(idventa).get();
     }
 
-    public Venta GuardarVenta(Venta venta) {
+    public Venta guardarVenta(Venta venta) {
         return ventarepository.save(venta);
     }
 
-    public void EliminarVenta(Long idventa) {
+    public void eliminarVenta(Long idventa) {
         ventarepository.deleteById(idventa);
     }
 

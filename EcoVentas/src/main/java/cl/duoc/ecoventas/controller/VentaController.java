@@ -18,7 +18,7 @@ public class VentaController {
 
     @GetMapping
     public ResponseEntity<?> ListarVentas() {
-        List<Venta> ventas =  ventaservice.BuscarTodaVenta();
+        List<Venta> ventas =  ventaservice.buscarTodaVenta();
         if (ventas.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("NO SE ENCUENTRAN DATOS");
         }else{
@@ -29,7 +29,7 @@ public class VentaController {
     @GetMapping("/{idventa}")
     public ResponseEntity<?> BuscarVenta(@PathVariable Long idventa) {
         try {
-            Venta ventabuscada = ventaservice.BuscarUnaVenta(idventa);
+            Venta ventabuscada = ventaservice.buscarUnaVenta(idventa);
             return ResponseEntity.ok(ventabuscada);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("NO SE ENCUENTRAN VENTAS");
@@ -39,7 +39,7 @@ public class VentaController {
     @PostMapping
     public ResponseEntity<?> GuardarVenta(@RequestBody Venta ventaGuardar) {
         try{
-            Venta ventaregistrar = ventaservice.GuardarVenta(ventaGuardar);
+            Venta ventaregistrar = ventaservice.guardarVenta(ventaGuardar);
             return ResponseEntity.ok(ventaregistrar);
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("NO SE PUEDE ALMACENAR LA VENTA");
@@ -49,8 +49,8 @@ public class VentaController {
     @DeleteMapping("/{idventa}")
     public ResponseEntity<?> EliminarVenta(@PathVariable Long idventa) {
         try{
-            Venta ventaBuscada = ventaservice.BuscarUnaVenta(idventa);
-            ventaservice.EliminarVenta(idventa);
+            Venta ventaBuscada = ventaservice.buscarUnaVenta(idventa);
+            ventaservice.eliminarVenta(idventa);
             return ResponseEntity.status(HttpStatus.OK).body("LA VENTA A SIDO ELIMINADA");
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("VENTA NO ENCONTRADA");
@@ -62,12 +62,12 @@ public class VentaController {
     @PutMapping("/{idventa}")
     public ResponseEntity<?> ActualizarVenta(@PathVariable Long idventa, @RequestBody Venta ventaActualizar) {
         try{
-            Venta ventaActualizada = ventaservice.BuscarUnaVenta(idventa);
+            Venta ventaActualizada = ventaservice.buscarUnaVenta(idventa);
             ventaActualizada.setRutusuario(ventaActualizar.getRutusuario());
             ventaActualizada.setFechaventa(ventaActualizar.getFechaventa());
             ventaActualizada.setTipoUsuario(ventaActualizar.getTipoUsuario());
             ventaActualizada.setTipoPago(ventaActualizar.getTipoPago());
-            ventaservice.GuardarVenta(ventaActualizada);
+            ventaservice.guardarVenta(ventaActualizada);
             return ResponseEntity.ok(ventaActualizada);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ESA VENTA NO SE ENCUENTRA REGISTTRADA");
