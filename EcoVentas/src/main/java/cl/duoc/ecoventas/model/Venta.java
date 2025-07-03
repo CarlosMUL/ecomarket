@@ -19,14 +19,14 @@ public class Venta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IDVENTA")
-    private Long idventa;
+    private Long idVenta;
 
     @Column(name = "RUTUSUARIO", nullable = false,length = 15)
-    private String rutusuario;
+    private String rutUsuario;
 
     @Column(name = "FECHAVENTA", nullable = false)
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDate fechaventa;
+    private LocalDate fechaVenta;
 
     @Column(name = "TIPOUSUARIO",nullable = false)
     private String tipoUsuario;
@@ -34,5 +34,4 @@ public class Venta {
     @Column(name = "TIPOPAGO",nullable = false)
     private String tipoPago;
 
-
-    }
+}
